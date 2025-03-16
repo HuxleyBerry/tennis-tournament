@@ -11,9 +11,9 @@ export default function TeamEntry({ handleSave, handleClose }: Props) {
   const [name2, setName2] = useState("");
 
   return (
-    <div className="w-lg">
+    <>
       <p className="mb-2 text-center">New Team</p>
-      <div className="flex mb-2 justify-around">
+      <div className="flex mb-2 w-full">
         <input
           placeholder="Name 1"
           className="grow mr-2 border border-gray-600 pl-1 rounded-sm"
@@ -30,7 +30,7 @@ export default function TeamEntry({ handleSave, handleClose }: Props) {
           </CustomButton>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex w-full">
         <input
           placeholder="Name 1"
           className="grow mr-2 border border-gray-600 pl-1 rounded-sm"
@@ -44,6 +44,6 @@ export default function TeamEntry({ handleSave, handleClose }: Props) {
           </CustomButton>
         </div>
       </div>
-    </div>
+    </>
   );
 }

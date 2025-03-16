@@ -20,19 +20,24 @@ export default function Home() {
   return (
     <>
       <p className="text-2xl text-center my-4">Manage Teams</p>
-      <div className="mb-4">
-        {teamStore.teamsInfo.map((teamInfo, index) => (
-          <TeamListing index={index} {...teamInfo} key={index} />
-        ))}
-      </div>
-      <div className="flex justify-center flex-col items-center">
-        {isAdding ? (
-          <TeamEntry handleSave={handleSave} handleClose={handleClose} />
-        ) : (
-          <CustomButton styleOption="primary" onClick={() => setIsAdding(true)}>
-            Add Team!
-          </CustomButton>
-        )}
+      <div className="lg:w-lg md:w-md, w-sm m-auto px-4">
+        <div className="mb-4">
+          {teamStore.teamsInfo.map((teamInfo, index) => (
+            <TeamListing index={index} {...teamInfo} key={index} />
+          ))}
+        </div>
+        <div className="flex justify-center flex-col items-center">
+          {isAdding ? (
+            <TeamEntry handleSave={handleSave} handleClose={handleClose} />
+          ) : (
+            <CustomButton
+              styleOption="primary"
+              onClick={() => setIsAdding(true)}
+            >
+              Add Team!
+            </CustomButton>
+          )}
+        </div>
       </div>
     </>
   );
