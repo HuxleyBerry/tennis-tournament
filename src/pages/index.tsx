@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div>
       <p className="text-2xl text-center my-4">Manage Teams</p>
       <div className="lg:w-lg md:w-md, w-sm m-auto px-4">
         <div className="mb-4">
@@ -39,6 +39,6 @@ export default function Home() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

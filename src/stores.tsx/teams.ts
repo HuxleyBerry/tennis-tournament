@@ -1,6 +1,6 @@
 import { TeamInfo } from "@/types.ts/teams";
 import { create } from "zustand";
-import { persist, devtools, createJSONStorage } from "zustand/middleware";
+import { persist, devtools } from "zustand/middleware";
 
 interface TeamStore {
   addTeam: (newTeamInfo: TeamInfo) => void;

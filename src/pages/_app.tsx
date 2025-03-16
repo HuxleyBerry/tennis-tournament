@@ -14,8 +14,8 @@ const roboto = Roboto({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className="flex min-h-screen flex-col">
-      <main className={roboto.variable}>
-        <Navbar />
+      <Navbar />
+      <main className={`${roboto.variable} flex-grow h-0`}>
         <Component {...pageProps} />
       </main>
     </div>
