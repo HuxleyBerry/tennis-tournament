@@ -9,7 +9,13 @@ export default function Home() {
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   function handleSave(name1: string, name2: string) {
-    teamStore.addTeam({ team: { name1, name2 }, status: "Absent", points: 0 });
+    teamStore.addTeam({
+      team: { name1, name2 },
+      status: "Absent",
+      points: 0,
+      gamesPlayed: 0,
+      timeOfLastGame: null,
+    });
     setIsAdding(false);
   }
 
