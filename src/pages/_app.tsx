@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className="flex min-h-screen flex-col">
       <main className={roboto.variable}>
         <Navbar />
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </main>
     </div>
   );
