@@ -1,15 +1,17 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import FastPriorityQueue from "fastpriorityqueue";
-import { MatchDisplay, PriorityQueueEntry, Team } from "@/types.ts/teams";
+import { Match, PriorityQueueEntry, Team } from "@/types.ts/teams";
 
 interface TournamentStore {
   tournamentStarted: boolean;
   courtsAvaliable: number;
-  queue: FastPriorityQueue<PriorityQueueEntry> | null;
-  currentMatches: MatchDisplay[];
+  queue: PriorityQueueEntry[];
+  currentMatches: Match[];
   setTournamentStarted: (isTournamentOngoing: boolean) => void;
-  setMatches: (newMatches: MatchDisplay[]) => void;
+  setMatches: (newMatches: Match[]) => void;
+  getMatches: () => Match[];
+  getQueue: () => PriorityQueueEntry[];
+  setQueue: (updatedQueue: PriorityQueueEntry[]) => void;
 }
 
 export const useTournamentStore = create<TournamentStore>()(
@@ -19,11 +21,15 @@ export const useTournamentStore = create<TournamentStore>()(
         tournamentStarted: false,
         courtsAvaliable: 8,
         currentMatches: [],
-        queue: null,
+        queue: [],
         setTournamentStarted: (isTournamentOngoing: boolean) =>
           set((state) => ({ tournamentStarted: isTournamentOngoing })),
-        setMatches: (newMatches: MatchDisplay[]) =>
+        setMatches: (newMatches: Match[]) =>
           set(() => ({ currentMatches: newMatches })),
+        getMatches: () => get().currentMatches,
+        getQueue: () => get().queue,
+        setQueue: (updatedQueue: PriorityQueueEntry[]) =>
+          set({ queue: updatedQueue }),
       }),
       {
         name: "tournament-storage",

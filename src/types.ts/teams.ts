@@ -12,17 +12,13 @@ export interface TeamInfo {
 }
 
 export interface Match {
-  team1: number;
-  team2: number;
-}
-
-export interface MatchDisplay {
-  team1: Team;
-  team2: Team;
+  team1: { index: number; names: Team };
+  team2: { index: number; names: Team };
 }
 
 export interface PriorityQueueEntry {
   team: Team;
+  teamIndex: number;
   gamesPlayed: number;
   timeOfLastGame: number | null;
 }
