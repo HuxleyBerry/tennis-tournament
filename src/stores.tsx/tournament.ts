@@ -7,6 +7,7 @@ interface TournamentStore {
   courtsAvaliable: number;
   queue: PriorityQueueEntry[];
   currentMatches: Match[];
+  getAvaliableCourtsCount: () => number;
   setTournamentStarted: (isTournamentOngoing: boolean) => void;
   setMatches: (newMatches: Match[]) => void;
   getMatches: () => Match[];
@@ -19,9 +20,10 @@ export const useTournamentStore = create<TournamentStore>()(
     persist(
       (set, get) => ({
         tournamentStarted: false,
-        courtsAvaliable: 8,
+        courtsAvaliable: 1,
         currentMatches: [],
         queue: [],
+        getAvaliableCourtsCount: () => get().courtsAvaliable,
         setTournamentStarted: (isTournamentOngoing: boolean) =>
           set((state) => ({ tournamentStarted: isTournamentOngoing })),
         setMatches: (newMatches: Match[]) =>

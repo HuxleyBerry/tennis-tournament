@@ -11,33 +11,34 @@ export default function Matches() {
   const teamStore = useTeamStore();
 
   function handleTournamentStart() {
-    tournamentStore.currentMatches = [];
+    tournamentStore.setMatches([]);
     const newQueue: PriorityQueueEntry[] = [];
     teamStore.teamsInfo.forEach((teamInfo, index) => {
       newQueue.push({ ...teamInfo, teamIndex: index });
     });
     Heap.heapify(newQueue, customComparator);
-    tournamentStore.queue = newQueue;
+    tournamentStore.setQueue(newQueue);
     tournamentStore.setTournamentStarted(true);
     createMatches();
   }
 
   function createMatches() {
     const matchesCopy = [...tournamentStore.getMatches()];
-    while (matchesCopy.length < tournamentStore.courtsAvaliable) {
+    while (matchesCopy.length < tournamentStore.getAvaliableCourtsCount()) {
       const queue = tournamentStore.getQueue();
-      const team1 = Heap.heappop(queue, customComparator);
-      const team2 = Heap.heappop(queue, customComparator);
-      if (team1 === undefined || team2 === undefined) {
-        // nothing left in queue
+      if (queue.length < 2) {
+        // not enough left in left in queue
         break;
       }
+      const team1 = Heap.heappop(queue, customComparator);
+      const team2 = Heap.heappop(queue, customComparator);
       matchesCopy.push({
-        team1: { index: team1.teamIndex, names: team1.team },
-        team2: { index: team2.teamIndex, names: team2.team },
+        team1: { index: team1!.teamIndex, names: team1!.team },
+        team2: { index: team2!.teamIndex, names: team2!.team },
       });
     }
     tournamentStore.setMatches(matchesCopy);
+    console.log(JSON.parse(JSON.stringify(tournamentStore.getQueue())));
   }
 
   function handleCompletion(matchIndex: number, teamIndexes: number[]) {
